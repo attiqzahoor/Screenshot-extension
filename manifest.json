@@ -1,0 +1,39 @@
+{
+    "manifest_version": 3,
+    "name": "Screenshot Extension",
+    "version": "1.0",
+    "description": "An extension to capture screenshots.",
+    "permissions": [
+      "activeTab",
+      "scripting",
+      "downloads"
+    ],
+    "background": {
+      "service_worker": "src/background.js"
+    },
+    "action": {
+      "default_popup": "src/popup.html",
+      "default_icon": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+      }
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["dist/bundle.js"],
+        "css": ["popup.css"]
+      }
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": ["dist/html2canvas.min.js"],
+        "matches": ["<all_urls>"]
+      }
+    ],
+    "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self';"
+    }
+  }
+  
